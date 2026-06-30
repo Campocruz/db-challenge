@@ -7,8 +7,6 @@ const credetial = {
   database: process.env.DB_NAME
 };
 
-console.log(credetial);
-
 const connection = mysql.createConnection(credetial)
 
 connection.connect((err) => {
