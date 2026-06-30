@@ -1,0 +1,43 @@
+-- 1
+SELECT *, TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) AS age
+FROM users;
+
+-- 2
+SELECT *
+FROM posts
+LEFT JOIN likes ON posts.id = likes.post_id
+WHERE likes.post_id IS NULL;
+
+-- 3
+SELECT posts.id, COUNT(likes.post_id) AS number_like
+FROM posts
+LEFT JOIN likes ON posts.id = likes.post_id
+GROUP BY posts.id;
+
+-- 4
+SELECT users.id, users.username, COUNT(medias.id) AS number_media
+FROM users
+LEFT JOIN medias ON users.id = medias.user_id
+GROUP BY users.id, users.username
+ORDER BY number_media DESC;
+
+-- 5
+SELECT users.id, users.username, COUNT(likes.post_id) AS total_like
+FROM users 
+LEFT JOIN posts ON users.id = posts.user_id
+LEFT JOIN likes ON posts.id = likes.post_id
+GROUP BY users.id, users.username
+ORDER BY total_like DESC;
+
+-- 6
+SELECT * , TIMESTAMPDIFF(YEAR, users.birthdate, CURDATE()) as age
+FROM posts 
+JOIN users ON posts.user_id = users.id
+WHERE TIMESTAMPDIFF(YEAR, users.birthdate, CURDATE()) BETWEEN 20 AND 30;
+
+-- 7
+SELECT users.id, users.username, COUNT(DISTINCT posts.id) AS number_post, COUNT(DISTINCT medias.id) AS number_media
+FROM users
+LEFT JOIN posts ON users.id = posts.user_id
+LEFT JOIN medias ON users.id = medias.user_id
+GROUP BY users.id, users.username;
