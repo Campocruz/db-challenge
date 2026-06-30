@@ -23,6 +23,11 @@ const connection = require('./database/connection')
 /*
       END IMPORT SECTION
 */
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+/*
+      CODE SECTION
+*/
 
 // Get Home
 app.get('/', (req, res) => {
@@ -31,7 +36,7 @@ app.get('/', (req, res) => {
   })
 })
 
-
+// Get Users
 app.get('/users', (req, res) => {
   const sql = `SELECT * FROM users`
 
@@ -41,7 +46,7 @@ app.get('/users', (req, res) => {
   })
 })
 
-
+// Get Users by ID
 app.get('/users/:id', (req, res) => {
 
   const id = req.params.id
@@ -55,6 +60,7 @@ app.get('/users/:id', (req, res) => {
   });
 });
 
+// Get Posts
 app.get('/posts', (req, res) => {
   const sql = `SELECT * FROM posts`
 
@@ -64,7 +70,7 @@ app.get('/posts', (req, res) => {
   })
 })
 
-
+// Get Posts by ID
 app.get('/posts/:id', (req, res) => {
 
   const id = req.params.id
@@ -77,6 +83,13 @@ app.get('/posts/:id', (req, res) => {
     res.json(results[0])
   });
 });
+
+/*
+      CODE SECTION
+*/
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 // Listen Server
 app.listen(port, () => {
