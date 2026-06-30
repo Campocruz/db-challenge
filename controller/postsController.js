@@ -43,3 +43,5 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
   res.status(500).json({ message: 'Da prototipare' });
 };
+
+module.exports = { index, show, store, update, modify, destroy }

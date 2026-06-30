@@ -22,6 +22,7 @@ const connection = require('./database/connection')
 
 // Import Routers
 const usersRouters = require('./routers/usersRouters')
+const postsRouters = require('./routers/postsRouters')
 
 /*
       END IMPORT SECTION
@@ -39,33 +40,11 @@ app.get('/', (req, res) => {
   })
 })
 
-// Use Router Post
+// Use Router User
 app.use('/users', usersRouters)
 
-
-// Get Posts
-app.get('/posts', (req, res) => {
-  const sql = `SELECT * FROM posts`
-
-  connection.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ error: 'Error DB connection' })
-    res.json(results)
-  })
-})
-
-// Get Posts by ID
-app.get('/posts/:id', (req, res) => {
-
-  const id = req.params.id
-
-  const sql = `SELECT * FROM posts WHERE id = ?`
-
-  connection.query(sql, [id], (err, results) => {
-    if (err) return res.status(500).json({ error: 'Error DB connection' })
-    if (results.length === 0) return res.status(404).json({ message: 'not found' })
-    res.json(results[0])
-  });
-});
+// Use Router Post
+app.use('/posts', postsRouters)
 
 /*
       CODE SECTION
